@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 [ApiController]
 public class TestController : ControllerBase
 {
-	[HttpGet("{Login}/{AnotherParameter}")]
-	public async Task<IActionResult> Get(string Login, string AnotherParameter)
+	[HttpGet("{**Login}")]
+	public async Task<IActionResult> Get(string Login, [FromQuery] string AnotherParameter)
 	{
 		return new OkObjectResult($"Test successful - {Login}, {AnotherParameter}");
 	}

@@ -27,6 +27,8 @@
 
 @code {
 
+
+
     string StatusCode = string.Empty;
 
     private async Task CallApi()
@@ -34,19 +36,19 @@
         try
         {
             string login = "mydomain\\myuser";
-            
+
             // Escaping the backlash works locally but not in production in Azure.
             login = Uri.EscapeDataString(login);
 
-            var response = await _httpClient.GetAsync($"test/{login}/foo");
+            var response = await _httpClient.GetAsync($"test/{login}?AnotherParameter=foo");
 
+            // we are getting a 404 (Not found error) 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 StatusCode = $"Result: {response.StatusCode}";
             }
             else
             {
-                // we are getting a 404 (Not found error)
                 var msg = await response.Content.ReadAsStringAsync();
                 StatusCode = $"Result: {msg}";
             }
