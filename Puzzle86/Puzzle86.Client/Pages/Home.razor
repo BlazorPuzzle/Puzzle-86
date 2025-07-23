@@ -1,0 +1,51 @@
+﻿@page "/"
+@inject HttpClient _httpClient;
+
+<PageTitle>Home</PageTitle>
+
+<h1>Puzzle #86: Unexpected 404</h1>
+
+<p>
+    This is a .NET 9 Blazor Web App with Global WebAssembly interactivity.
+</p>
+<p>
+    We are attempting to call an API endpoint passing a login string that includes a backslash (\\).
+</p>
+<p>
+    It only works locally if we escape the backslash, but it does not work in production on Azure.
+</p>
+<p>
+    How can we fix it so that it works both locally and in production?
+</p>
+<br/>
+
+<button class="btn btn-primary" @onclick="CallApi">Call API</button>
+<br />
+<br />
+<h3>@StatusCode</h3>
+
+
+@code {
+
+    string StatusCode = string.Empty;
+
+    private async Task CallApi()
+    {
+        try
+        {
+            string login = "mydomain\\myuser";
+
+            // Escaping the backlash works locally but not in production in Azure.
+            //login = Uri.EscapeDataString(login);
+
+            var response = await _httpClient.GetAsync($"test/{login}");
+
+            // we are getting a 404 (Not found error) 
+            StatusCode = $"Result: {response.StatusCode}";
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error calling API: {ex.Message}");
+        }
+    }
+}
