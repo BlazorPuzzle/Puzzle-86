@@ -2,7 +2,7 @@
 
 Carl and Jeff want to know why this API call isn't working in production (Azure Web Apps)
 
-YouTube Video: https://youtu.be/
+YouTube Video: https://youtu.be/[1uiLkNFRwM4](https://t.co/00u1QXpTln)
 
 Blazor Puzzle Home Page: https://blazorpuzzle.com
 
